@@ -1,0 +1,56 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainFrame extends JFrame {
+    private JButton jbtnBIG = new JButton("大");
+    private JButton jbtnSmall = new JButton("小");
+    private JButton jbtnExit = new JButton("Exit");
+    private JLabel jlb = new JLabel("好爽喔");
+private int count = 15;
+    public MainFrame() {
+        init();
+    }
+
+    private void init() {
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.setLocation(100, 50);
+        this.setSize(800, 600);
+
+        jbtnBIG.setLocation(50, 60);
+        jbtnBIG.setSize(120, 30);
+
+        jbtnSmall.setLocation(200, 60);
+        jbtnSmall.setSize(120, 30);
+
+        jbtnExit.setBounds(400,60,120,30);
+
+        jlb.setBounds(20, 150, 150, 100);
+        this.add(jbtnBIG);
+        this.add(jbtnSmall);
+        this.add(jbtnExit);
+        this.add(jlb);
+        jbtnBIG.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                count+=3;
+                jlb.setFont(new Font(null,Font.BOLD,count));
+            }
+        });
+        jbtnSmall.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                count-=3;
+                jlb.setFont(new Font(null,Font.BOLD,count));
+            }
+        });
+        jbtnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+    }
+}
