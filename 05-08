@@ -1,0 +1,70 @@
+import javax.swing.*;
+
+public class MainFrame extends JFrame{
+    private JButton jbtn0 = new JButton("0");
+    private JButton jbtn1 = new JButton("1");
+    private JButton jbtn2 = new JButton("2");
+    private JButton jbtn3 = new JButton("3");
+    private JButton jbtn4 = new JButton("4");
+    private JButton jbtn5 = new JButton("5");
+    private JButton jbtn6 = new JButton("6");
+    private JButton jbtn7 = new JButton("7");
+    private JButton jbtn8 = new JButton("8");
+    private JButton jbtn9 = new JButton("9");
+    private JButton jbtn10 = new JButton("+");
+    private JButton jbtn11 = new JButton("-");
+    private JButton jbtn12 = new JButton("*");
+    private JButton jbtn13 = new JButton("/");
+    private JButton jbtn14 = new JButton(".");
+    private JButton jbtn15 = new JButton("=");
+    private JButton jbtn16 = new JButton("EXIT");
+    private JLabel jlb = new JLabel();
+    private JTextField jtf = new JTextField();
+    public MainFrame() {
+        a1();}
+    private void a1(){
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.setLocation(100,100);
+        this.setSize(1500,1000);
+        jbtn0.setBounds(150,450,250,150);
+        jbtn1.setBounds(150,350,150,150);
+        jbtn2.setBounds(250,350,150,150);
+        jbtn3.setBounds(350,350,150,150);
+        jbtn4.setBounds(150,250,150,150);
+        jbtn5.setBounds(250,250,150,150);
+        jbtn6.setBounds(350,250,150,150);
+        jbtn7.setBounds(150,150,150,150);
+        jbtn8.setBounds(250,150,150,150);
+        jbtn9.setBounds(350,150,150,150);
+        jbtn10.setBounds(450,150,150,250);
+        jbtn11.setBounds(450,50,150,150);
+        jbtn12.setBounds(350,50,150,150);
+        jbtn13.setBounds(250,50,150,150);
+        jbtn14.setBounds(350,450,150,150);
+        jbtn15.setBounds(450,350,150,250);
+        jbtn16.setBounds(150,50,150,150);
+        jlb.setBounds(550,50,350,350);
+        jtf.setBounds(550,50,350,350);
+        this.add(jbtn0);
+        this.add(jbtn1);
+        this.add(jbtn2);
+        this.add(jbtn3);
+        this.add(jbtn4);
+        this.add(jbtn5);
+        this.add(jbtn6);
+        this.add(jbtn7);
+        this.add(jbtn8);
+        this.add(jbtn9);
+        this.add(jbtn10);
+        this.add(jbtn11);
+        this.add(jbtn12);
+        this.add(jbtn13);
+        this.add(jbtn14);
+        this.add(jbtn15);
+        this.add(jbtn16);
+        this.add(jlb);
+        this.add(jtf);
+        System.exit(0);
+    }
+}
