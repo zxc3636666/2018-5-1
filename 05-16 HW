@@ -1,0 +1,46 @@
+public class Sum {
+    //将实现方式放入Sum方法中，在主函数中调用
+    public Sum(int num){
+
+        int sum = 1;//初始化sum，当序列中数增加到num时，输出满足条件的序列
+        int beg = 1;//从1开始
+        int cur = 1;//当前数字
+
+        while(beg <=num/2+1){
+
+            if(sum == num){
+                System.out.print(num + "=");
+
+                for(int k = beg;k<=cur;k++){
+
+                    if(k==cur){
+                        System.out.print(k+";");
+                    }
+                    else{
+                        System.out.print(k + "+");
+                    }
+                }
+                System.out.println();
+                sum = sum - beg;
+                beg++;
+                cur++;
+                sum +=cur;
+            }
+            if(sum>num){
+                sum = sum - beg;
+                beg++;
+            }
+            else{
+                cur++;
+                sum +=cur;
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+        new Sum(15);
+    }
+
+}
