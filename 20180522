@@ -1,0 +1,115 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainFrame extends JFrame {
+    private int dirFlag = 1, objX =50, objY = 50, objW =50, objH = 50;
+    private Container cp;
+    private JLabel jlb = new JLabel();
+    private JPanel jp1 = new JPanel();
+    private JPanel jp2 =  new JPanel(new GroupLayout(1,6,3.3));
+    private ImageIcon icon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\untitled\\src\\images.jpg");
+    private Timer t1;
+    private JButton jb1 = new JButton("RUN");
+    private JButton jb2 = new JButton("↑");
+    private JButton jb3 = new JButton("↓");
+    private JButton jb4 = new JButton("←");
+    private JButton jb5 = new JButton("→");
+    private JButton jb6 = new JButton("exit");
+    public MainFrame() {
+        init();
+    }
+
+    private void init() {
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setLocation(100, 50);
+        this.setSize(800, 600);
+        cp = this.getContentPane();
+        cp.add(jp1,BorderLayout.CENTER);
+        cp.add(jp2,BorderLayout.SOUTH);
+
+        jlb.setIcon(icon);
+        //jlb.setBounds(objX,objY,500,500);
+       // jb1.setBounds(100, 450, 100, 100);
+       // jb2.setBounds(200, 450, 100, 100);
+        // jb3.setBounds(300, 450, 100, 100);
+       // jb4.setBounds(400, 450, 100, 100);
+      //  jb5.setBounds(500, 450, 100, 100);
+      //  jb6.setBounds(600, 450, 100, 100);
+
+        this.add(jb1);
+        this.add(jb2);
+        this.add(jb3);
+        this.add(jb4);
+        this.add(jb5);
+        this.add(jb6);
+        this.add(jlb);
+        jb1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                t1.start();
+            }
+        });
+        jb2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 1;
+            }
+        });
+        jb3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 2;
+            }
+        });
+        jb4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 3;
+            }
+        });
+        jb5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 4;
+            }
+        });
+        t1 = new Timer(5, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                switch (dirFlag){
+                    case 1:
+                        if(objY - 2>0){
+                        objY -= 2;
+                    }
+                    break;
+                        case 2:
+                    if (objY < 600 - objH){
+                                objY += 2;
+                        }
+                        break;
+                    case 3:
+                        if (objX -2>0){
+                            objX -=2;
+                        }
+                        break;
+                        case 4:
+                            if (objX < 600 - objW){
+                                objX +=2;
+                            }
+                            break;
+                }
+                jlb.setLocation(objX , objY);
+            }
+        });
+        jb6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+    }
+}
