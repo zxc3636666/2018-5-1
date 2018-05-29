@@ -1,0 +1,175 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class MainFrame extends JFrame {
+    private int dirFlag = 1, objX =50, objY = 50, objW =50, objH = 50;
+    private Container cp;
+    private JLabel jlb = new JLabel();
+    private JPanel jp1 = new JPanel();
+    private JPanel jp2 =  new JPanel(new GridLayout(1,6,3,3));
+    private ImageIcon icon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\untitled\\src\\images");
+    private Timer t1,t2;
+    private JButton jb1 = new JButton("RUN");
+    private JButton jb2 = new JButton("↑");
+    private JButton jb3 = new JButton("↓");
+    private JButton jb4 = new JButton("←");
+    private JButton jb5 = new JButton("→");
+    private JButton jb6 = new JButton("exit");
+    private int dirFlag = 3 ,step = 2;
+    private  boolean jlbFocusFlag = false;
+    private int newX,newY,tarX,tarY;
+    private float m2 = 0.0f;
+    private boolean jlb2Flag = false;
+    public MainFrame() { init(); }
+
+    private void init() {
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocation(100, 50);
+        this.setSize(800, 600);
+        cp = this.getContentPane();
+        cp.setLayout(new BorderLayout(1,1));
+        jlb.setBounds(objX , objY , 50 , 50);
+        jlb.setIcon(icon);
+        t2 = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(Math.abs(jlb.getX() - tarX) < 30 && Math.abs(jlb.getY() - tarY) < 30){
+                    jlb2Flag = false;
+                }else{
+                    int newJlb1X,newJlb1Y;
+                    if (jlb.getX() < tarX){
+                        newJlb1X = jlb.getX()+3;
+                    }else {
+                        newJlb1X = jlb.getX()-3;
+                    }
+                    newJlb1Y = Math.round(m2 * (float)newJlb1X - jlb.getX()) + jlb.getY();
+                    jlb.setLocation(newJlb1X , newJlb1Y);
+                    System.out.println(newJlb1X + "," +newJlb1Y);
+                }
+                System.out.println(tarX+","+tarY+"\t=>"+(jlb.getX() - tarX)+"\t=>"+(jlb.getY() - tarY));
+            }
+        });
+        t1 = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+        jp1.setLayout(null);
+        jp1.add(jlb);
+        cp.add(jp1,BorderLayout.CENTER);
+        jp2.add(jb1);
+        jp2.add(jb2);
+        jp2.add(jb3);
+        jp2.add(jb4);
+        jp2.add(jb5);
+        jp2.add(jb6);
+        cp.add(jp2,BorderLayout.SOUTH);
+        jlb.setIcon(icon);
+        //jlb.setBounds(objX,objY,500,500);
+        // jb1.setBounds(100, 450, 100, 100);
+        // jb2.setBounds(200, 450, 100, 100);
+        // jb3.setBounds(300, 450, 100, 100);
+        // jb4.setBounds(400, 450, 100, 100);
+        //  jb5.setBounds(500, 450, 100, 100);
+        //  jb6.setBounds(600, 450, 100, 100);
+        jlb.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jlb2Flag = true;
+            }
+        });
+        jp1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                tarX = e.getX();
+                tarY = e.getY();
+                if (jlb2Flag){
+                    m2 = (float)(tarY - jlb.getY())/(float)(tarX - jlb.getX());
+                    System.out.println("m2 ="+m2);
+                    t2.start();
+                }
+            }
+        });
+//        t2 = new Timer(10, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent actionEvent) {
+//
+//            }
+//        });
+//        t1 = new Timer(10, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent actionEvent) {
+//
+//            }
+//        });
+        jb1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                t1.start();
+            }
+        });
+        jb2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 0;
+            }
+        });
+        jb3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 1;
+            }
+        });
+        jb4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 2;
+            }
+        });
+        jb5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dirFlag = 3;
+            }
+        });
+//        t1 = new Timer(5, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent actionEvent) {
+//                switch (dirFlag){
+//                    case 1:
+//                        if(objY - 2>0){
+//                            objY -= 2;
+//                        }
+//                        break;
+//                    case 2:
+//                        if (objY < 600 - objH){
+//                            objY += 2;
+//                        }
+//                        break;
+//                    case 3:
+//                        if (objX -2>0){
+//                            objX -=2;
+//                        }
+//                        break;
+//                    case 4:
+//                        if (objX < 600 - objW){
+//                            objX +=2;
+//                        }
+//                        break;
+//                }
+//                jlb.setLocation(objX , objY);
+//            }
+//        });
+        jb6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+    }
+}
