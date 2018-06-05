@@ -1,0 +1,82 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class Frame extends JFrame{
+    private Container cp;
+    private JLabel jlb = new JLabel();
+    private ImageIcon img1 = new ImageIcon("man.jpg.png");
+    private ImageIcon img4 = new ImageIcon("man1.png");
+    private ImageIcon img3 = new ImageIcon("rocket.png");
+    private JLabel jlb1 = new JLabel();
+    private Timer t1;
+
+    public Frame(){
+        init();
+    }
+
+    private void init(){
+
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setBounds(100,100,800,700);
+        cp = this.getContentPane();
+        cp.setLayout(null);
+
+        Image img = img1.getImage();
+        Image img2 = img.getScaledInstance(200,120,Image.SCALE_SMOOTH);
+        img1.setImage(img2);
+
+        jlb.setBounds(350,500,200,120);
+        jlb.setIcon(img1);
+
+         img = img3.getImage();
+         img2 = img.getScaledInstance(50,40,Image.SCALE_SMOOTH);
+        img3.setImage(img2);
+
+        img = img4.getImage();
+        img2 = img.getScaledInstance(200,120,Image.SCALE_SMOOTH);
+        img4.setImage(img2);
+
+        jlb1.setBounds(jlb.getX() , jlb.getY() , 100,70);
+        jlb1.setIcon(img3);
+
+        cp.add(jlb);
+        t1 = new Timer(20, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                jlb1.setLocation(jlb1.getX(),jlb1.getY()-5);
+                if (jlb1.getY()<0){
+                    t1.stop();
+                }
+            }
+        });
+        this.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                System.out.println(keyEvent.getKeyCode());
+                switch (keyEvent.getKeyCode()){
+                    case 37:
+                        jlb.setIcon(img4);
+                        jlb.setLocation(jlb.getX()-5, jlb.getY());
+                        break;
+                    case 38:
+                        jlb.setLocation(jlb.getX(), jlb.getY()-5);
+                        break;
+                    case 39:
+                        jlb.setIcon(img1);
+                        jlb.setLocation(jlb.getX()+5, jlb.getY());
+                        break;
+                    case 40:
+                        jlb.setLocation(jlb.getX(), jlb.getY()+5);
+                        break;
+                    case 32:
+                        jlb1.setBounds(jlb.getX()+70,jlb.getY(),100,70);
+                        cp.add(jlb1);
+                        t1.start();
+                }
+            }
+        });
+    }
+}
